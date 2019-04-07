@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/CorredorDeLaberintos/Game/Content/Sound/coin.mp3</SourceFile>
+  <SourceTime>2010-12-18T01:00:02.7013197+01:00</SourceTime>
+  <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/CorredorDeLaberintos/Game/Content/bin/DesktopGL/Content/Sound/coin.xnb</DestFile>
+  <DestTime>2019-04-06T17:58:13.3415897+02:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/CorredorDeLaberintos/Game/Content/bin/DesktopGL/Content/Sound/coin.ogg</string>
+  </BuildOutput>
+</PipelineBuildEvent>
