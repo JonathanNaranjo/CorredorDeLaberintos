@@ -10,16 +10,6 @@ using Nez;
 
 namespace Game.Factories
 {
-    public enum EntityType
-    {
-        Player,
-        Background,
-        Coin,
-        Score,
-        Exit,
-		Bug,
-		Damage
-    }
 
     public class EntityFactory
     {
@@ -43,6 +33,10 @@ namespace Game.Factories
 					return new Exit(position, width, height);
 				case EntityType.Damage:
 					return new Damage(position, width, height);
+                case EntityType.Diamond:
+                    return new Diamond(position);
+				case EntityType.Mine:
+					return new Mine(position);
 				default:
                     throw new ArgumentException("Entity type not supported");
             }

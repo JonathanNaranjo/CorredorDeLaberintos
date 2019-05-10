@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{EF0E87F2-EAC9-4CAA-BC53-1C4CF6281895}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NezEngine", "NezEngine", "{2436AFDF-9941-427E-A8AA-697B12B7E1C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nez", "Nez\Nez.Portable\Nez.csproj", "{EFEEA09D-372C-4ABD-B4A4-77CB6B7B41D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nez.FarseerPhysics", "Nez\Nez.FarseerPhysics\Nez.FarseerPhysics.csproj", "{84D9891C-69F9-4804-9594-70918F3E4BD9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nez.PipelineImporter", "Nez\Nez.PipelineImporter\Nez.PipelineImporter.csproj", "{688DD698-FA79-47DE-A6CE-919BCC9B1A26}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nez.ImGui", "Nez\Nez.ImGui\Nez.ImGui.csproj", "{8DE0CFA8-45CD-47AA-96B6-009C94482AA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,31 @@ Global
 		{EF0E87F2-EAC9-4CAA-BC53-1C4CF6281895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF0E87F2-EAC9-4CAA-BC53-1C4CF6281895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF0E87F2-EAC9-4CAA-BC53-1C4CF6281895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFEEA09D-372C-4ABD-B4A4-77CB6B7B41D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFEEA09D-372C-4ABD-B4A4-77CB6B7B41D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFEEA09D-372C-4ABD-B4A4-77CB6B7B41D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFEEA09D-372C-4ABD-B4A4-77CB6B7B41D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D9891C-69F9-4804-9594-70918F3E4BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D9891C-69F9-4804-9594-70918F3E4BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D9891C-69F9-4804-9594-70918F3E4BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D9891C-69F9-4804-9594-70918F3E4BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688DD698-FA79-47DE-A6CE-919BCC9B1A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688DD698-FA79-47DE-A6CE-919BCC9B1A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688DD698-FA79-47DE-A6CE-919BCC9B1A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688DD698-FA79-47DE-A6CE-919BCC9B1A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE0CFA8-45CD-47AA-96B6-009C94482AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE0CFA8-45CD-47AA-96B6-009C94482AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE0CFA8-45CD-47AA-96B6-009C94482AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE0CFA8-45CD-47AA-96B6-009C94482AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EFEEA09D-372C-4ABD-B4A4-77CB6B7B41D4} = {2436AFDF-9941-427E-A8AA-697B12B7E1C0}
+		{84D9891C-69F9-4804-9594-70918F3E4BD9} = {2436AFDF-9941-427E-A8AA-697B12B7E1C0}
+		{688DD698-FA79-47DE-A6CE-919BCC9B1A26} = {2436AFDF-9941-427E-A8AA-697B12B7E1C0}
+		{8DE0CFA8-45CD-47AA-96B6-009C94482AA5} = {2436AFDF-9941-427E-A8AA-697B12B7E1C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECBCB1C0-FA0B-4E0B-8B5E-D30BAFE86932}

@@ -9,10 +9,10 @@ namespace Game
 {
     public class Game : Core
     {
-		public static ManagerState ManagerState;
+		public static StateManager ManagerState;
         public Game() : base(width: 635, height: 475, isFullScreen: false)
         {
-			ManagerState = new ManagerState();
+			ManagerState = new StateManager();
 		}
 
         protected override void Initialize()
@@ -20,7 +20,8 @@ namespace Game
             base.Initialize();
 			exitOnEscapeKeypress = false;
             Window.Title = Constants.GAME_TITLE;
-			ManagerState.SetState(StateType.MainMenu);
+            Window.AllowUserResizing = false;
+            scene = new Level();
         }
     }
 }

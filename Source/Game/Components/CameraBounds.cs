@@ -45,10 +45,10 @@ namespace Game.Components
 
             if (cameraBounds.left < min.X)
                 entity.scene.camera.position += new Vector2(min.X - cameraBounds.left, 0);
-
-            if (cameraBounds.bottom > max.Y)
-                entity.scene.camera.position += new Vector2(0, max.Y - cameraBounds.bottom);
-
+            
+			if( cameraBounds.bottom > max.Y )
+				entity.scene.camera.position += new Vector2( 0, max.Y - cameraBounds.bottom );
+			
             if (cameraBounds.right > max.X)
                 entity.scene.camera.position += new Vector2(max.X - cameraBounds.right, 0);
         }

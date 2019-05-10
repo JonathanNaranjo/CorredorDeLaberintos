@@ -13,26 +13,25 @@ using Nez.Tiled;
 using Nez.Textures;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using Game.Factories;
+using Game.Entities.Base;
 
 namespace Game.Entities
 {
-    class Coin : Entity
+    public class Coin : ItemBase
     {
         private Sprite<TypeAnimation> animation;
         private int sizeFrame = 16;
-        private Song soundCoin;
 
-        public Coin(Vector2 position) : base("Coin")
+        public Coin(Vector2 position) : base(EntityType.Coin.ToString())
         {
             this.position = position;
-            addComponent(new CoinBehavior());
+            addComponent(new ItemBehavior());
             addComponent<CircleCollider>();
         }
 
         public override void onAddedToScene()
         {
-            soundCoin = scene.content.Load<Song>(Content.Sound.coin);
-
             var texture = scene.content.Load<Texture2D>(Content.Sprite.coin);
             var subtextures = Subtexture.subtexturesFromAtlas(texture, sizeFrame , sizeFrame);
             animation = this.addComponent(new Sprite<TypeAnimation>(subtextures[0]));
@@ -62,9 +61,9 @@ namespace Game.Entities
             set => this.animation.play(value);
         }
 
-        public void PlayCoin()
+        public override void Touch()
         {
-            MediaPlayer.Play(soundCoin);
+			SoundManager.PlaySound(Content.Sound.coin);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.Entities;
+using Game.Scenes;
 using Nez;
 
 namespace Game.Components
@@ -16,9 +17,10 @@ namespace Game.Components
 		{
 			Debug.log("triggerEnter: {0}", other.entity.name);
 
-			if ((other.entity as Player) != null)
+			var playerEntity = other.entity as Player;
+			if (playerEntity != null)
 			{
-				Game.ManagerState.SetState(StateType.GamePlay);
+				playerEntity.Kill();
 			}
 		}
 

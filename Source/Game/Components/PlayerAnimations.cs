@@ -13,11 +13,6 @@ using Nez.Textures;
 
 namespace Game.Components
 {
-    public enum TypeAnimation
-    {
-        Walk, Run, Idle, Attack, Death, Falling, Hurt, Jumping, Slide, Blink, Flip
-    }
-
     public class PlayerAnimations : Component
     {
         private Sprite<TypeAnimation> animation;

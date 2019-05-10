@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Game.Entities;
 using Nez;
 using Nez.Tiled;
+using Game.Scenes;
 
 namespace Game.Components
 {
@@ -29,36 +30,36 @@ namespace Game.Components
 			this.boxCollider = entity.getComponent<BoxCollider>();
 			this.mover = entity.getComponent<TiledMapMover>();
 			moveDir = new Vector2(-1, 0);
-
 		}
 
 		public void update()
 		{
-			if (collisionState.left)
-				moveDir.X = 1;
-
-			if (collisionState.right)
-				moveDir.X = -1;
-
-			if (moveDir.X < 0)
+			if (bugEntity.Alive)
 			{
-				this.bugEntity.FlipX = true;
-				this.velocity.X = -moveSpeed;
+				if (collisionState.left)
+					moveDir.X = 1;
+
+				if (collisionState.right)
+					moveDir.X = -1;
+
+				if (moveDir.X < 0)
+				{
+					this.bugEntity.FlipX = true;
+					this.velocity.X = -moveSpeed;
+				}
+
+				if (moveDir.X > 0)
+				{
+					this.bugEntity.FlipX = false;
+					this.velocity.X = moveSpeed;
+				}
+
+				// apply gravity
+				this.velocity.Y += gravity * Time.deltaTime;
+
+				// move
+				this.mover.move(this.velocity * Time.deltaTime, this.boxCollider, this.collisionState);
 			}
-			
-			if (moveDir.X > 0)
-			{
-				this.bugEntity.FlipX = false;
-				this.velocity.X = moveSpeed;
-			}
-
-
-			// apply gravity
-			this.velocity.Y += gravity * Time.deltaTime;
-
-			// move
-			this.mover.move(this.velocity * Time.deltaTime, this.boxCollider, this.collisionState);
-
 		}
 
 
@@ -70,44 +71,23 @@ namespace Game.Components
 			Debug.log("triggerEnter: {0}", other.entity.name);
 
 			var playerEntity = other.entity as Player;
-			if (playerEntity != null)
+			if (bugEntity.Alive && playerEntity != null)
 			{
-				if (entity.position.Y > playerEntity.position.Y)
-					entity.destroy();
-				
+				if (bugEntity.position.Y + bugEntity.Height > playerEntity.position.Y + playerEntity.Height)
+				{
+					playerEntity.Impulse();
+					bugEntity.Kill();
+				}
+				else
+				{
+					if (playerEntity.getComponent<PlayerController>().Sliding)
+						bugEntity.Kill();
+					else
+						playerEntity.Kill();
+				}
 			}
 
 		}
-		/*
-		bool checkCollideTop(Collider other, Collider self)
-		{
-			double x = other.absolutePosition.X;
-			double x2 = other.absolutePosition.X + other.
-			double y;
-
-			if (Position.Y < spr.Position.Y)
-			{
-				//Check for collisions on one side of the sprite
-				y = spr.Position.Y;
-				if (!_hit && LineCheckH(y, x, x2))
-				{
-					spr._hit = true;
-					HitObjectFloor(spr);
-					spr.HitObjectCeiling(this);
-				}
-			}
-			else if ((Position.Y + Dimensions.Height) > (spr.Position.Y + spr.Dimensions.Height))
-			{
-				//Check for collisions on the other side
-				y = spr.Position.Y + spr.Dimensions.Height;
-				if (!_hit && LineCheckH(y, x, x2))
-				{
-					return true;
-				}
-			}
-		}
-		*/
-
 
 		void ITriggerListener.onTriggerExit(Collider other, Collider self)
 		{

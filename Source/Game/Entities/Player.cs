@@ -12,50 +12,55 @@ using Nez.Sprites;
 using Nez.Tiled;
 using Nez.Textures;
 using Microsoft.Xna.Framework.Media;
+using Game.Entities.Base;
+using Game.Scenes;
 
 namespace Game.Entities
 {
-    enum Animations
+    public class Player : PlayerBase
     {
-        Walk,
-        Run,
-        Idle,
-        Attack,
-        Death,
-        Falling,
-        Hurt,
-        Jumping
-    }
-
-    
-
-    public class Player : Entity
-    {
-
-        BoxCollider boxCollider;
-        private Song soundJump;
+        private BoxCollider boxCollider;
+		private PlayerController playerController;
+		public int Width { get => (int)boxCollider.width; }
+		public int Height { get => (int)boxCollider.height; }
 
 
-        public Player(Vector2 position) : base("Player")
+		public Player(Vector2 position) : base("Player")
         {
             this.position = position;
-            boxCollider = addComponent<BoxCollider>();
+			boxCollider = addComponent<BoxCollider>();
             addComponent<PlayerAnimations>();
-            addComponent<PlayerController>();
+            playerController = addComponent<PlayerController>();
             addComponent<ColliderNotify>();
+			
         }
 
         public override void onAddedToScene()
         {
-            boxCollider.setWidth(16);
+			(scene as Level)?.SetMapCollition(this);
+			this.scene.camera.entity.addComponent(new FollowCamera(this));
+
+            boxCollider.setWidth(12);
             boxCollider.setHeight(32);
-
-            soundJump = scene.content.Load<Song>(Content.Sound.jump);
         }
 
-        public void PlayJump()
-        {
-            MediaPlayer.Play(soundJump);
-        }
-    }
+
+		public void SetInitialPosition()
+		{
+			playerController.SetInitialPosition();
+		}
+
+		public override void Kill()
+		{
+			var level = scene as Level;
+			level?.RestartLevel();
+			SoundManager.PlaySound(Content.Sound.death);
+			SetInitialPosition();
+		}
+
+		public void Impulse()
+		{
+			playerController.Impulse();
+		}
+	}
 }

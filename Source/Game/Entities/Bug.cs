@@ -13,25 +13,40 @@ using Nez.Sprites;
 using Nez.Tiled;
 using Nez.Textures;
 using Game.Components;
+using Game.Entities.Base;
+using Game.Scenes;
 
 namespace Game.Entities
 {
-	class Bug : Entity
+	class Bug : EnemyBase
 	{
 		private Sprite<TypeAnimation> animation;
 		private int sizeFrame = 32;
 		private BoxCollider boxCollider;
-		public Bug(Vector2 position) : base("Bug")
+		public int Width { get => (int)boxCollider.width; }
+		public int Height { get => (int)boxCollider.height; }
+		public TypeAnimation Animation
+		{
+			get => this.animation.currentAnimation;
+			set => this.animation.play(value);
+		}
+		public bool FlipX { get => this.animation.flipX; set => this.animation.flipX = value; }
+		private double deathCounter;
+		private double deathLimit;
+
+		public Bug(Vector2 position) : base(EntityType.Bug.ToString())
 		{
 			this.position = position;
 			addComponent(new BugBehavior());
 			boxCollider = addComponent<BoxCollider>();
 			boxCollider.setHeight(21);
 			boxCollider.setWidth(32);
+			this.deathLimit = 0.5;
 		}
 
 		public override void onAddedToScene()
 		{
+			(scene as Level)?.SetMapCollition(this);
 			this.position = new Vector2(this.position.X + sizeFrame / 2, this.position.Y);
 
 			var texture = scene.content.Load<Texture2D>(Content.Sprite.bug1);
@@ -58,11 +73,24 @@ namespace Game.Entities
 			this.Animation = TypeAnimation.Walk;
 		}
 
-		public TypeAnimation Animation
+		public override void update()
 		{
-			get => this.animation.currentAnimation;
-			set => this.animation.play(value);
+			base.update();
+
+			if (!Alive)
+			{ 
+				deathCounter += Time.deltaTime;
+				if (deathCounter > deathLimit)
+					this.destroy();
+			}
 		}
-		public bool FlipX { get => this.animation.flipX; set => this.animation.flipX = value; }
+
+		public override void Kill()
+		{
+			this.Animation = TypeAnimation.Death;
+			this.Alive = false;
+			SoundManager.PlaySound(Content.Sound.squish);
+		}
+
 	}
 }

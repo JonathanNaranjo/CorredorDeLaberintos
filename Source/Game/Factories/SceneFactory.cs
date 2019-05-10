@@ -18,7 +18,7 @@ namespace Game.Factories
             switch(type)
             {
                 case StateType.IntroGame:
-                    return new Intro();
+                    return new IntroGame();
                 case StateType.MainMenu:
                     return new Menu();
                 case StateType.GamePlay:

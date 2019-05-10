@@ -17,7 +17,7 @@ namespace Game.Components
         public override void onAddedToEntity()
         {
             _collider = entity.getComponent<Collider>();
-            Assert.isNotNull(_collider, "null Collider. ProjectilMover requires a Collider!");
+            //Assert.isNotNull(_collider, "null Collider. ProjectilMover requires a Collider!");
         }
 
         public void update()

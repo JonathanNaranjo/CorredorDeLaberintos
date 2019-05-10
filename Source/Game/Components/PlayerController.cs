@@ -14,37 +14,56 @@ namespace Game.Components
     public class PlayerController : Component, IUpdatable
     {
         private Player playerEntity;
-        public float moveSpeed = 150;
+		private Vector2 initialPosition;
+		private Vector2 velocity;
+		public float moveSpeed = 150;
         public float gravity = 1000;
         public float jumpHeight = 16 * 5;
-        PlayerAnimations playerAnimation;
+		private Vector2 moveDir;
+
+		private float slideDir = 0;
+		private float slideSpeed = 350;
+		private float slideCurrentSpeed = 0;
+
+		private float impulseAirDir = 0;
+		private float impulseAirSpeed = 400;
+		private float impulseAirCurrentSpeed = 0;
+
+		private int jumpAirDir = 0;
+
+		PlayerAnimations playerAnimation;
         TiledMapMover mover;
         BoxCollider boxCollider;
         TiledMapMover.CollisionState collisionState = new TiledMapMover.CollisionState();
-        Vector2 velocity;
 
+
+		// Controls
         VirtualButton jumpInput;
         VirtualButton leftInput;
         VirtualButton rightInput;
         VirtualButton downInput;
-        VirtualIntegerAxis xAxisInput;
+		VirtualButton testInput;
+		VirtualIntegerAxis xAxisInput;
 
-        private int _slideSpeed;
+		// State Movement
         public bool Sliding;
-        private bool _slideUp;
+		public bool Jumping;
+		public bool ImpulseAir;
 
-        /// <summary>
-        /// Init
-        /// </summary>
-        public override void onAddedToEntity()
+		
+
+		/// <summary>
+		/// Init
+		/// </summary>
+		public override void onAddedToEntity()
         {
             this.playerEntity = (Player)this.entity;
             this.boxCollider = entity.getComponent<BoxCollider>();
             this.mover = entity.getComponent<TiledMapMover>();
             this.playerAnimation = entity.getComponent<PlayerAnimations>();
+			this.initialPosition = playerEntity.position;
+			this.moveDir = Vector2.Zero;
 
-            _slideUp = true;
-            Sliding = false;
             setupInput();
         }
 
@@ -57,7 +76,6 @@ namespace Game.Components
             rightInput.deregister();
             xAxisInput.deregister();
         }
-
 
         void setupInput()
         {
@@ -78,106 +96,202 @@ namespace Game.Components
             rightInput.nodes.Add(new Nez.VirtualButton.KeyboardKey(Keys.Right));
             rightInput.nodes.Add(new Nez.VirtualButton.GamePadButton(0, Buttons.DPadRight));
 
-            // horizontal input from dpad, left stick or keyboard left/right
-            xAxisInput = new VirtualIntegerAxis();
+			testInput = new VirtualButton();
+			testInput.nodes.Add(new Nez.VirtualButton.KeyboardKey(Keys.C));
+
+			// horizontal input from dpad, left stick or keyboard left/right
+			xAxisInput = new VirtualIntegerAxis();
             xAxisInput.nodes.Add(new Nez.VirtualAxis.GamePadDpadLeftRight());
             xAxisInput.nodes.Add(new Nez.VirtualAxis.GamePadLeftStickX());
             xAxisInput.nodes.Add(new Nez.VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.TakeNewer, Keys.Left, Keys.Right));
+
+
         }
 
         void IUpdatable.update()
         {
-            // handle movement and animations
-            var moveDir = new Vector2(xAxisInput.value, 0);
-            var animation = TypeAnimation.Idle;
+			moveDir = new Vector2(xAxisInput.value, 0);
 
-            if (moveDir.X < 0)
-            {
-                if (this.collisionState.below)
-                    animation = TypeAnimation.Run;
+			// Onground
+			//-----------------------------------------------------------------------
+			if (collisionState.below)
+			{
+				jumpAirDir = 0;
 
-                this.playerAnimation.FlipX = true;
-                this.velocity.X = -moveSpeed;
-            }
-            else if (moveDir.X > 0)
-            {
-                if (this.collisionState.below)
-                    animation = TypeAnimation.Run;
+				// Run
+				if (moveDir.X != 0)
+				{
+					if (leftInput.isDown || rightInput.isDown)
+						DoWalk();
+				}
+				else
+				{
+					// Idle
+					DoIdle();
+				}
 
-                this.playerAnimation.FlipX = false;
-                this.velocity.X = moveSpeed;
+				// Slide
+				if (!Sliding && moveDir.X != 0 && downInput.isReleased)
+				{
+					DoSlide();
+				}
+				else
+				{
+					if (Sliding)
+						DoSlide();
+				}
 
-                
-            }
-            else
-            {
-                this.velocity.X = 0;
-                if (this.collisionState.below)
-                    animation = TypeAnimation.Idle;
-            }
-
-            // Slide
-            if (!Sliding && (!downInput.isDown) || (!leftInput.isDown && !rightInput.isDown))
-                _slideUp = true;
-
-            //if (!Sliding && this.collisionState.below && downInput.isDown)
-            if (this.collisionState.below && downInput.isDown)
-            {
-                if (leftInput.isDown)
-                {
-                    this.playerAnimation.FlipX = true;
-                    animation = TypeAnimation.Slide;
-                    this.velocity.X = -Mathf.sqrt(2f * jumpHeight * gravity);
-                    Sliding = true;
-                    _slideUp = false;
-                }
-
-                if (rightInput.isDown)
-                {
-                    this.playerAnimation.FlipX = false;
-                    animation = TypeAnimation.Slide;
-                    this.velocity.X = Mathf.sqrt(2f * jumpHeight * gravity);
-                    Sliding = true;
-                    _slideUp = false;
-                }
-            }
-
-            // Jump
-            if (this.collisionState.below && jumpInput.isPressed)
-            {
-                animation = TypeAnimation.Jumping;
-                this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
-				playerEntity.PlayJump();
-            }
+				// Jump
+				if (jumpInput.isPressed)
+					DoJump();
+			}
 
 
-            // Falling
-            if (!this.collisionState.below && this.velocity.Y > 0)
-                animation = TypeAnimation.Falling;
+			// OnAir
+			//-----------------------------------------------------------------------
+			if (!collisionState.below)
+			{
+				Sliding = false;
 
+				// WalkAir
+				if (moveDir.X != 0)
+				{
+					if (leftInput.isDown || rightInput.isDown)
+						DoWalkAir();
+				}
 
-            // apply gravity
-            this.velocity.Y += gravity * Time.deltaTime;
+				if (velocity.Y > 0)
+					SetAnimation(TypeAnimation.Falling);
 
+				if (collisionState.left || collisionState.right && jumpInput.isPressed)
+				{
+					DoJumpAir();
+				}
+			}
 
-            // move
-            this.mover.move(this.velocity * Time.deltaTime, this.boxCollider, this.collisionState);
+			// Gravity
+			this.velocity.Y += gravity * Time.deltaTime;
 
+			// Move
+			this.mover.move(this.velocity * Time.deltaTime, this.boxCollider, this.collisionState);
 
-			// Blow to the head
-			if (this.collisionState.above)
+			// Blow to the head or On the floor
+			if (this.collisionState.above && this.velocity.Y < 0)
+			{
+				this.velocity.Y = 0;
+				SoundManager.PlaySound(Content.Sound.land);
+			}
+
+			if (this.collisionState.below)
 				this.velocity.Y = 0;
 
-			// On the floor
-			if (this.collisionState.below)
-                this.velocity.Y = 0;
+		}
 
-            if (playerAnimation.Animation != animation)
-            {
-                playerAnimation.Animation = animation;
-            }
+		#region Movements
+		//------------------------------------------------------------------
+		private void DoIdle()
+		{
+			this.velocity.X = 0;
+			SetAnimation(TypeAnimation.Idle);
+		}
 
-        }
+		private void DoWalk()
+		{
+			this.velocity.X = (moveDir.X) * moveSpeed;
+			SetAnimation(TypeAnimation.Run);
+		}
 
-    }
+		private void DoJump()
+		{
+			this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
+			SetAnimation(TypeAnimation.Jumping);
+			if (Sliding)
+				SoundManager.PlaySound(Content.Sound.slidejump);
+			else
+				SoundManager.PlaySound(Content.Sound.jump);
+		}
+
+		private void DoWalkAir()
+		{
+			this.velocity.X = (moveDir.X) * moveSpeed;
+			SetAnimation(TypeAnimation.Jumping);
+		}
+
+		private void DoSlide()
+		{
+			SetAnimation(TypeAnimation.Slide);
+			
+			if (!Sliding) // Slide off
+			{
+				this.slideDir = (moveDir.X);
+				this.slideCurrentSpeed = this.slideSpeed;
+				Sliding = true;
+				SoundManager.PlaySound(Content.Sound.slide);
+			}
+
+			if (Sliding) // Slide on
+			{
+				this.slideCurrentSpeed -= Time.deltaTime * 500;
+				this.velocity.X = (slideDir) * this.slideCurrentSpeed;
+
+				if (this.slideCurrentSpeed <= 0 || this.collisionState.left || this.collisionState.right)
+					Sliding = false;
+			}
+		}
+
+		private void DoJumpAir()
+		{
+			if (collisionState.left && jumpAirDir != -1 && jumpInput.isPressed)
+			{
+				DoJump();
+				jumpAirDir = -1;
+			}
+
+			if (collisionState.right && jumpAirDir != 1 && jumpInput.isPressed)
+			{
+				DoJump();
+				jumpAirDir = 1;
+			}
+
+		}
+
+		//------------------------------------------------------------------
+		#endregion
+
+
+
+		private void SetAnimation(TypeAnimation typeAnimation)
+		{
+			if (this.moveDir.X < 0)
+				playerAnimation.FlipX = true;
+
+			if (this.moveDir.X > 0)
+				playerAnimation.FlipX = false;
+			
+			if (playerAnimation.Animation != typeAnimation)
+				playerAnimation.Animation = typeAnimation;
+		}
+
+		public void SetInitialPosition()
+		{
+			playerEntity.position = initialPosition;
+			velocity.X = 0;
+			velocity.Y = 0;
+			playerAnimation.Animation = TypeAnimation.Idle;
+			playerAnimation.FlipX = false;
+		}
+
+		public void Jump()
+		{
+			playerAnimation.Animation = TypeAnimation.Jumping;
+			this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
+			SoundManager.PlaySound(Content.Sound.jump);
+		}
+
+		public void Impulse()
+		{
+			playerAnimation.Animation = TypeAnimation.Jumping;
+			this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
+		}
+	}
 }

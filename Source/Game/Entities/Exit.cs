@@ -12,10 +12,11 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Game.Components;
 using Microsoft.Xna.Framework.Graphics;
+using Game.Entities.Base;
 
 namespace Game.Entities
 {
-	class Exit : Entity
+	class Exit : EnvironmentBase
 	{
 		public Exit(Vector2 position, int width, int height) : base("Exit")
 		{
@@ -27,7 +28,8 @@ namespace Game.Entities
 		public override void onAddedToScene()
 		{
 			var texture = scene.content.Load<Texture2D>(Content.Sprite.exit);
-			addComponent(new Sprite(texture));
+			addComponent(new Sprite(texture)).renderLayer = 1;
+				
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.Entities;
+using Game.Scenes;
 using Nez;
 
 namespace Game.Components
@@ -18,7 +19,8 @@ namespace Game.Components
 
 			if ((other.entity as Player) != null)
 			{
-				Game.ManagerState.SetState(StateType.MainMenu);
+				//Game.ManagerState.SetState(StateType.MainMenu);
+				(other.entity.scene as Level)?.findComponentOfType<LevelBehavior>().SetNextState(StateType.MainMenu);
 			}
 		}
 

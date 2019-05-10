@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/CorredorDeLaberintos/Game/Content/Font/scoreFont.spritefont</SourceFile>
+  <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/scoreFont.spritefont</SourceFile>
   <SourceTime>2019-03-27T23:55:25.4830814+01:00</SourceTime>
-  <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/CorredorDeLaberintos/Game/Content/bin/DesktopGL/Font/scoreFont.xnb</DestFile>
-  <DestTime>2019-04-07T12:27:54.7972927+02:00</DestTime>
+  <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Font/scoreFont.xnb</DestFile>
+  <DestTime>2019-04-22T02:40:55.7333803+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

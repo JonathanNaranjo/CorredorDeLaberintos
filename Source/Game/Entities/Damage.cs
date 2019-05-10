@@ -11,13 +11,13 @@ using Nez.Textures;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Game.Components;
-
+using Game.Entities.Base;
 
 namespace Game.Entities
 {
-	class Damage : Entity
+	class Damage : EnvironmentBase
 	{
-		public Damage(Vector2 position, int width, int heigth) : base("Damage")
+		public Damage(Vector2 position, int width, int heigth) : base(EntityType.Damage.ToString())
 		{
 			this.position = position;
 			addComponent(new DamageBehavior());

@@ -13,7 +13,7 @@ using Nez.Tweens;
 
 namespace Game.Scenes
 {
-    class Menu : Scene
+    class Menu : SceneBase
     {
         public const int SCREEN_SPACE_RENDER_LAYER = 999;
         public UICanvas canvas;
@@ -22,10 +22,22 @@ namespace Game.Scenes
         List<Button> _sceneButtons = new List<Button>();
         ScreenSpaceRenderer _screenSpaceRenderer;
 
-        public Menu()
+        public Menu() : base()
         {
-			clearColor = Color.BurlyWood;
+
+        }
+        public override void initialize()
+        {
+            base.initialize();
+
+            // setup a pixel perfect screen that fits our map
+            //setDesignResolution(512, 256, Scene.SceneResolutionPolicy.ShowAllPixelPerfect);
+            //Screen.setSize(512 * 3, 256 * 3);
+            //------
+            clearColor = Color.BurlyWood;
 			addRenderer(new DefaultRenderer());
+            
+            Screen.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
 			bool needsFullRenderSizeForUI = false;
             bool addExcludeRenderer = true;

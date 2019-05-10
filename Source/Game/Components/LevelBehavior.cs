@@ -12,6 +12,8 @@ namespace Game.Components
 	class LevelBehavior : Component, IUpdatable
 	{
 		VirtualButton escapeInput;
+		private StateType nextState;
+		private bool hasNewState = false;
 
 		/// <summary>
 		/// Init
@@ -33,6 +35,18 @@ namespace Game.Components
 			{
 				Game.ManagerState.SetState(StateType.MainMenu);
 			}
+
+			if (hasNewState)
+			{
+				Game.ManagerState.SetState(nextState);
+				hasNewState = false;
+			}
+		}
+
+		public void SetNextState(StateType nextState)
+		{
+			this.nextState = nextState;
+			this.hasNewState = true;
 		}
 	}
 }

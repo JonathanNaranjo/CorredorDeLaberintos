@@ -15,63 +15,71 @@ using Game.Factories;
 
 namespace Game.Scenes
 {
-    class Level : Scene
-    {
-        public override void initialize()
-        {
-            clearColor = Color.Coral;
-			addRenderer(new DefaultRenderer());
+	class Level : Scene
+	{
+		private Entity mapEntity;
+		private TiledMap tiledMap;
+		private TiledMapComponent mapLayer;
 
+		public override void initialize()
+        {
+			base.initialize();
             var managerScene = createEntity("ManagerScene");
             managerScene.addComponent(new DebugScene());
 			managerScene.addComponent(new LevelBehavior());
 
-            // setup a pixel perfect screen that fits our map
-            setDesignResolution(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Scene.SceneResolutionPolicy.ShowAllPixelPerfect);
+			//addEntity(new Background());
 
-            // render layer for all lights and any emissive Sprites
-            var LIGHT_RENDER_LAYER = 5;
-
-            // create a Renderer that renders all but the light layer and screen space layer
-            addRenderer(new RenderLayerExcludeRenderer(0, LIGHT_RENDER_LAYER, 5));
-
-            // create a Renderer that renders only the light layer into a render target
-            var lightRenderer = addRenderer(new RenderLayerRenderer(-1, LIGHT_RENDER_LAYER));
-            lightRenderer.renderTargetClearColor = new Color(10, 10, 10, 255);
-            lightRenderer.renderTexture = new RenderTexture();
-
-            // Create map
-            LoadMap();
-        }
-
-        private void LoadMap()
-        {
-            var tiledEntity = createEntity("TileMap");
-            var tiledMap = content.Load<TiledMap>(Content.Map.tiledMap);
-            var objectLayer = tiledMap.getObjectGroup("entities");
-            var tiledMapComponent = tiledEntity.addComponent(new TiledMapComponent(tiledMap, "main"));
-
-            LoadEntities(objectLayer);
-
-            // Add compontent of collition with tilemap 
-            var playerEntity = this.entities.findEntity("Player");
-            if (playerEntity != null)
-                playerEntity.addComponent(new TiledMapMover(tiledMapComponent.collisionLayer));
-
-			var bugEntity = this.entities.findEntity("Bug");
-			if (bugEntity != null)
-				bugEntity.addComponent(new TiledMapMover(tiledMapComponent.collisionLayer));
-
+			// Create map
+			LoadMap();
+			LoadEntities();
 		}
 
-        private void LoadEntities(TiledObjectGroup objects)
+		private void LoadMap()
         {
-            var entities = objects.objects;
+			mapEntity = createEntity(EntityType.TileMap.ToString());
+			tiledMap = content.Load<TiledMap>(Content.Map.tiledMap);
+			mapLayer = mapEntity.addComponent(new TiledMapComponent(tiledMap, "Map"));
 
-            foreach (var item in entities)
+			// Camera bounds
+			var topLeft = new Vector2(tiledMap.tileWidth, tiledMap.tileWidth);
+			var bottomRight = new Vector2(tiledMap.tileWidth * (tiledMap.width - 1), tiledMap.tileWidth * (tiledMap.height - 1));
+			mapEntity.addComponent(new CameraBounds(topLeft, bottomRight));
+			mapEntity.tag = (int)TagType.TileMap;
+			//mapLayer.renderLayer = 4;
+		}
+
+        private void LoadEntities(bool ignorePlayer = false)
+        {
+			TiledObject[] entities = this.tiledMap.getObjectGroup("Entities").objects;
+
+			foreach (var e in entities)
             {
-                addEntity(EntityFactory.CreateEntity(item.name, new Vector2(item.x, item.y), item.width,item.height));
+				if (ignorePlayer && e.name.Equals(EntityType.Player.ToString()))
+					continue;
+				else
+					addEntity(EntityFactory.CreateEntity(e.name, new Vector2(e.x, e.y), e.width, e.height));
             }
         }
+
+        public void RestartLevel()
+        {
+			var listaEntidades = this.findEntitiesWithTag((int)TagType.Item);
+			listaEntidades.AddRange(this.findEntitiesWithTag((int)TagType.Enemy));
+			listaEntidades.AddRange(this.findEntitiesWithTag((int)TagType.Environment));
+
+			foreach (var e in listaEntidades)
+			{
+				e.components.removeAllComponents();
+				this.entities.remove(e);
+			}
+
+			LoadEntities(true);
+		}
+
+		public void SetMapCollition(Entity entity)
+		{
+			entity.addComponent(new TiledMapMover(mapLayer.collisionLayer));
+		}
     }
 }
