@@ -63,7 +63,11 @@ namespace Game.Entities
 
         public override void Touch()
         {
-			SoundManager.PlaySound(Content.Sound.coin);
+            var player = scene.findEntity("Player") as Player;
+            if (player != null)
+                player.getComponent<PlayerInventary>().Coins++;
+
+            SoundManager.PlaySound(Content.Sound.coin);
         }
     }
 }

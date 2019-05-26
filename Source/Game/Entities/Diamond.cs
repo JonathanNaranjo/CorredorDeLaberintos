@@ -57,7 +57,11 @@ namespace Game.Entities
 
         public override void Touch()
         {
-			SoundManager.PlaySound(Content.Sound.diamond);
+            var player = scene.findEntity("Player") as Player;
+            if (player != null)
+                player.getComponent<PlayerInventary>().Diamonds++;
+
+            SoundManager.PlaySound(Content.Sound.diamond);
         }
     }
 }

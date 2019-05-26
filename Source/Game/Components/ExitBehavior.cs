@@ -20,7 +20,7 @@ namespace Game.Components
 			if ((other.entity as Player) != null)
 			{
 				//Game.ManagerState.SetState(StateType.MainMenu);
-				(other.entity.scene as Level)?.findComponentOfType<LevelBehavior>().SetNextState(StateType.MainMenu);
+				(other.entity.scene as Level)?.findComponentOfType<LevelBehavior>().SetNextState(StateType.EndOfGame);
 			}
 		}
 

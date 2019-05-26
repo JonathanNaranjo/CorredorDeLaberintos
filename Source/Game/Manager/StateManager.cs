@@ -19,9 +19,9 @@ namespace Game
 		private StateType currentState;
 		public StateType CurrentState { get => currentState; }
 
-		public void SetState(StateType state, bool persistent = false)
+		public void SetState(StateType state, bool transition = false)
 		{
-			/*
+            /*
 			// If exist in the dictionary
 			if (scenesDict.ContainsKey(state))
 			{
@@ -47,16 +47,17 @@ namespace Game
 
 				
 			}*/
-            
-            SetScene(SceneFactory.CreateScene(state));
+
+            SoundManager.StopMusic();
+            SetScene(SceneFactory.CreateScene(state), transition);
 
 		}
 
-		private void SetScene(Scene scene)
+		private void SetScene(Scene scene, bool transition)
 		{
-			Game.scene = scene;
-			/*
-			if (Game.scene != null)
+            //Game.scene = scene;
+            
+            if (transition)
 			{
 
                 TweenManager.stopAllTweens();
@@ -66,14 +67,7 @@ namespace Game
 			{
 				Game.scene = scene;
 			}
-            */
-			//Game.scene.
-			//Game.scene = scene;
-
-			/*
-			TweenManager.stopAllTweens();
-			Game.startSceneTransition(new FadeTransition(() => scene));
-			*/
+            
 		}
 
 	}

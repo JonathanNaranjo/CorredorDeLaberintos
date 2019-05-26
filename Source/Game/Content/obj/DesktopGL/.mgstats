@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/test.tmx","C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Map/test.xnb","TiledMapProcessor","TmxMap",10006,26754,0,3391254
+"C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/credits.png","C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Image/credits.xnb","TextureProcessor","Texture2DContent",46409,1228885,0,223559

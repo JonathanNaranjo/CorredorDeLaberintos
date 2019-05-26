@@ -10,8 +10,7 @@ namespace Game
     {
         public static class Font
         {
-            public const string scoreFont = @"font\scoreFont";
-            public const string textFont = @"font\textFont";
+            public const string text = @"Font\textFont";
         }
 		public static class Terrain
 		{
@@ -22,13 +21,33 @@ namespace Game
 		}
 		public static class Sprite
         {
-            public const string player = @"Sprites\player";
-            public const string coin = @"Sprites\coin";
-            public const string diamond = @"Sprites\diamond";
-            public const string bug1 = @"Sprites\bug1";
-			public const string exit = @"Sprites\exit";
-            public const string splash = @"Sprites\splash";
-            public const string mine = @"Sprites\mine";
+            public const string player = @"Sprite\player";
+            public const string coin = @"Sprite\coin";
+            public const string diamond = @"Sprite\diamond";
+            public const string bug1 = @"Sprite\bug1";
+            public const string bug2 = @"Sprite\bug2";
+            public const string exit = @"Sprite\exit";
+            public const string mine = @"Sprite\mine";
+
+        }
+
+        public static class Image
+        {
+            public const string end_game = @"Image\end_game";
+            public const string credits = @"Image\credits";
+            public const string configurar = @"Image\configurar";
+            public const string menu_background = @"Image\menu_background";
+        }
+
+        public static class Menu
+        {
+            public const string btn_jugar_on = @"Menu\btn_jugar_on";
+            public const string btn_jugar_off = @"Menu\btn_jugar_off";
+        }
+
+        public static class Music
+        {
+            public const string level1 = @"Music\level1_music";
         }
 
         public static class Sound
@@ -46,8 +65,7 @@ namespace Game
 
         public static class Map
         {
-            public const string tiledMap = @"Map\test";
-            public const string tileset = @"Map\tileset";
+            public const string level1 = @"Map\Level1";
         }
     }
 }

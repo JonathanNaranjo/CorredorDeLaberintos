@@ -4,11 +4,16 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/scoreFont.spritefont</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont.spritefont</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/test.tmx</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/tiledMap.tmx</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/tileset.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont.fnt</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont_0.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont_1.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/configurar.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/credits.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/end_game.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/menu_background.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/Level1.tmx</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/tileset_dungeon.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Music/level1_music.mp3</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/bounce.mp3</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/button.mp3</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/coin.mp3</File>
@@ -24,19 +29,16 @@
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/slidejump.mp3</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/spring.mp3</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/squish.mp3</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/bug1.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/coin.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/diamond.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/exit.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/mine.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/player.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprites/splash.jpg</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Terrain/bg1.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Terrain/bg2.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Terrain/bg3.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Terrain/bg4.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/bug1.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/bug2.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/coin.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/diamond.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/exit.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/mine.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/player.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -10,10 +10,11 @@ using Nez.Sprites;
 using Nez.Textures;
 using Microsoft.Xna.Framework;
 using Nez.Tweens;
+using Nez.BitmapFonts;
 
 namespace Game.Scenes
 {
-    class Menu : SceneBase
+    class Menu : Scene
     {
         public const int SCREEN_SPACE_RENDER_LAYER = 999;
         public UICanvas canvas;
@@ -70,42 +71,52 @@ namespace Game.Scenes
         {
             _table = canvas.stage.addElement(new Table());
 			_table.setFillParent(true).center().center();
+        }
 
-            var topButtonStyle = new TextButtonStyle(new PrimitiveDrawable(Color.Black, 10f), new PrimitiveDrawable(Color.Yellow), new PrimitiveDrawable(Color.DarkSlateBlue))
+
+        public override void onStart()
+        {
+            // Fondo de menu
+            var texture = content.Load<Texture2D>(Content.Image.menu_background);
+            Image imag = canvas.stage.addElement(new Image(texture));
+            imag.setWidth(Constants.SCREEN_WIDTH);
+            imag.setHeight(Constants.SCREEN_HEIGHT);
+            imag.setZIndex(0);
+
+            // Cargamos el estilo
+            var textFont = content.Load<BitmapFont>(Content.Font.text);
+            TextButtonStyle topButtonStyle = new TextButtonStyle()
             {
-                downFontColor = Color.Black
+                font = textFont,
+                fontColor = Color.Black,
+                overFontColor = Color.Brown,
+                downFontColor = Color.DarkRed
             };
-			if (!(Game.ManagerState.CurrentState == StateType.GamePlay))
-			{
-				_table.add(new TextButton(Constants.MENU_PLAY, topButtonStyle)).setFillX().setMinHeight(30).getElement<Button>().onClicked += MenuPlay;
-			}
-			else
-			{
-				_table.add(new TextButton(Constants.MENU_RESUMEN, topButtonStyle)).setFillX().setMinHeight(30).getElement<Button>().onClicked += MenuPlay;
-			}
-				
 
+            // Creamos los botones
+            _table.add(new TextButton(Constants.MENU_PLAY, topButtonStyle)).setFillX().setMinHeight(30).getElement<Button>().onClicked += MenuPlay;
             _table.row();
             _table.add(new TextButton(Constants.MENU_CONFIG, topButtonStyle)).setFillX().setMinHeight(30).getElement<Button>().onClicked += MenuConfig;
             _table.row();
             _table.add(new TextButton(Constants.MENU_CREDITS, topButtonStyle)).setFillX().setMinHeight(30).getElement<Button>().onClicked += MenuCredits;
             _table.row();
             _table.add(new TextButton(Constants.MENU_EXIT, topButtonStyle)).setFillX().setMinHeight(30).getElement<Button>().onClicked += MenuExit;
+
         }
 
         private void MenuPlay(Button butt)
         {
-			Game.ManagerState.SetState(StateType.GamePlay, false);
-		}
+            Game.ManagerState.SetState(StateType.GamePlay, true);
+        }
 
         private void MenuConfig(Button butt)
         {
-			
+            Game.ManagerState.SetState(StateType.Config, true);
         }
 
         private void MenuCredits(Button butt)
         {
-
+            Game.ManagerState.SetState(StateType.Credits, true);
         }
 
         private void MenuExit(Button butt)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Media;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using Nez;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,6 @@ namespace Game
 
         public static void PlayMusic(string songName, bool repeating = true)
         {
-            // If the song is already playing, then bail out
-            if (_currentSong == songName)
-                return;
             _currentSong = songName;
 
             // Load and play the song
@@ -37,11 +35,17 @@ namespace Game
             MediaPlayer.IsRepeating = repeating;
         }
 
-		public static void PlaySound(string songName)
+        public static void StopMusic()
+        {
+            MediaPlayer.Stop();
+        }
+
+
+        public static void PlaySound(string songName)
 		{
-			var song = Core.content.Load<Song>(songName);
-			MediaPlayer.Play(song);
-		}
+            SoundEffect song = Core.content.Load<SoundEffect>(songName);
+            song.Play();
+        }
 
         public static void SetVolume(float value)
         {

@@ -20,25 +20,28 @@ namespace Game.Scenes
 		private Entity mapEntity;
 		private TiledMap tiledMap;
 		private TiledMapComponent mapLayer;
+        public const int SCREEN_SPACE_RENDER_LAYER = 999;
+        public UICanvas canvas;
 
-		public override void initialize()
+        public override void initialize()
         {
 			base.initialize();
+            clearColor = Color.Black;
             var managerScene = createEntity("ManagerScene");
             managerScene.addComponent(new DebugScene());
 			managerScene.addComponent(new LevelBehavior());
+            initializaCanvas();
 
-			//addEntity(new Background());
-
-			// Create map
-			LoadMap();
+            // Create map
+            LoadMap();
 			LoadEntities();
+            this.addEntity(new Score(this.canvas));
 		}
 
 		private void LoadMap()
         {
 			mapEntity = createEntity(EntityType.TileMap.ToString());
-			tiledMap = content.Load<TiledMap>(Content.Map.tiledMap);
+			tiledMap = content.Load<TiledMap>(Content.Map.level1);
 			mapLayer = mapEntity.addComponent(new TiledMapComponent(tiledMap, "Map"));
 
 			// Camera bounds
@@ -81,5 +84,19 @@ namespace Game.Scenes
 		{
 			entity.addComponent(new TiledMapMover(mapLayer.collisionLayer));
 		}
+
+        public void initializaCanvas()
+        {
+            addRenderer(new ScreenSpaceRenderer(100, SCREEN_SPACE_RENDER_LAYER));
+            addRenderer(new RenderLayerExcludeRenderer(0, SCREEN_SPACE_RENDER_LAYER));
+            canvas = createEntity("ui").addComponent(new UICanvas());
+            canvas.isFullScreen = true;
+            canvas.renderLayer = SCREEN_SPACE_RENDER_LAYER;
+        }
+
+        public override void onStart()
+        {
+            SoundManager.PlayMusic(Content.Music.level1);
+        }
     }
 }

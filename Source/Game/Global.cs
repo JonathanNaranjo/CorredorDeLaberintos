@@ -11,11 +11,6 @@ namespace Game
 		Walk, Run, Idle, Attack, Death, Falling, Hurt, Jumping, Slide, Blink, Flip
 	}
 
-	enum Animations
-	{
-		Walk, Run, Idle, Attack, Death, Falling, Hurt, Jumping
-	}
-
 	public enum TagType
 	{
 		Environment = 1, TileMap, Item, Enemy, Player
@@ -23,7 +18,7 @@ namespace Game
 
 	public enum EntityType
 	{
-		Player, Background, Coin, Diamond, Score, Exit, Bug, Damage, TileMap, Mine
+		Player, Background, Coin, Diamond, Score, Exit, Bug1, Bug2, Damage, TileMap, Mine
 	}
 
 	public enum StateType

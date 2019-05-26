@@ -21,8 +21,10 @@ namespace Game.Entities
     {
         private BoxCollider boxCollider;
 		private PlayerController playerController;
+        private PlayerInventary playerInventary;
 		public int Width { get => (int)boxCollider.width; }
 		public int Height { get => (int)boxCollider.height; }
+
 
 
 		public Player(Vector2 position) : base("Player")
@@ -32,6 +34,7 @@ namespace Game.Entities
             addComponent<PlayerAnimations>();
             playerController = addComponent<PlayerController>();
             addComponent<ColliderNotify>();
+            playerInventary = addComponent<PlayerInventary>();
 			
         }
 
@@ -47,6 +50,7 @@ namespace Game.Entities
 
 		public void SetInitialPosition()
 		{
+            playerInventary.ResetInventary();
 			playerController.SetInitialPosition();
 		}
 

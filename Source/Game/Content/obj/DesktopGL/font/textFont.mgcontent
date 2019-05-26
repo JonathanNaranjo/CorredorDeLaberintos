@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont.spritefont</SourceFile>
-  <SourceTime>2019-03-27T23:55:25.4830814+01:00</SourceTime>
+  <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont.fnt</SourceFile>
+  <SourceTime>2019-05-25T21:16:36.036764+02:00</SourceTime>
   <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Font/textFont.xnb</DestFile>
-  <DestTime>2019-04-22T02:40:55.7823424+02:00</DestTime>
-  <Importer>FontDescriptionImporter</Importer>
-  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
-  <Processor>FontDescriptionProcessor</Processor>
-  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
+  <DestTime>2019-05-26T22:07:49.1777556+02:00</DestTime>
+  <Importer>BitmapFontImporter</Importer>
+  <ImporterTime>2019-04-18T00:21:45.5275808+02:00</ImporterTime>
+  <Processor>BitmapFontProcessor</Processor>
+  <ProcessorTime>2019-04-18T00:21:45.5275808+02:00</ProcessorTime>
   <Parameters>
-    <Key>PremultiplyAlpha</Key>
+    <Key>packTexturesIntoXnb</Key>
     <Value>True</Value>
   </Parameters>
   <Parameters>
-    <Key>TextureFormat</Key>
-    <Value>Compressed</Value>
+    <Key>compressTextures</Key>
+    <Value>False</Value>
   </Parameters>
-  <Dependencies />
+  <Dependencies>
+    <string>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont_0.png</string>
+  </Dependencies>
   <BuildAsset />
   <BuildOutput />
 </PipelineBuildEvent>

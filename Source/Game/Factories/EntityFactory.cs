@@ -19,16 +19,14 @@ namespace Game.Factories
             
             switch (type)
             {
-                case EntityType.Background:
-                    return new Background();
                 case EntityType.Player:
                     return new Player(position);
-				case EntityType.Bug:
-					return new Bug(position);
+				case EntityType.Bug1:
+					return new Bug1(position);
+                case EntityType.Bug2:
+                    return new Bug2(position);
                 case EntityType.Coin:
                     return new Coin(position);
-                case EntityType.Score:
-                    return new Score();
 				case EntityType.Exit:
 					return new Exit(position, width, height);
 				case EntityType.Damage:

@@ -16,10 +16,12 @@ namespace Game.Scenes
     class IntroGame : Scene
     {
 
-        readonly int timeToChange = 2;
+        public int timeToChange = 2;
 
         public override void initialize()
         {
+            /*
+            base.initialize();
             clearColor = Color.Aqua;
             addRenderer(new DefaultRenderer());
 
@@ -28,9 +30,11 @@ namespace Game.Scenes
             
             // TimeEvent to chage of scene in seconds
             var timedEvent = new TimeEvent(timeToChange);
-            timedEvent.Interval += this.ChangeToMenu;
+            //timedEvent.Interval += this.ChangeToMenu;
             timedEvent.Active = true;
+            timeEntity.addComponent(timedEvent);
 
+            
             //Splash Entity
             var splashEntity = this.createEntity("Splash");
             var textureSplash = this.content.Load<Texture2D>(Content.Sprite.exit);
@@ -46,10 +50,13 @@ namespace Game.Scenes
 
 
             splashEntity.addComponent(spriteSplash);
-            timeEntity.addComponent(timedEvent);
-            this.addEntity(timeEntity);
-
             
+          
+
+            this.addEntity(timeEntity);
+            */
+
+
 
         }
 
@@ -60,7 +67,8 @@ namespace Game.Scenes
 
         private void ChangeToMenu(object sender, EventArgs e)
         {
-            Game.ManagerState.SetState(StateType.MainMenu);
+            //Game.ManagerState.SetState(StateType.MainMenu);
+ 
         }
     }
 }

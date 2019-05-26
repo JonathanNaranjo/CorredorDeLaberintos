@@ -33,7 +33,7 @@ namespace Game.Components
 		{
 			if (escapeInput.isReleased)
 			{
-				Game.ManagerState.SetState(StateType.MainMenu);
+				Game.ManagerState.SetState(StateType.MainMenu, true);
 			}
 
 			if (hasNewState)

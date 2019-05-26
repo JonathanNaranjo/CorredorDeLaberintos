@@ -23,6 +23,12 @@ namespace Game.Factories
                     return new Menu();
                 case StateType.GamePlay:
                     return new Level();
+                case StateType.EndOfGame:
+                    return new EndGame();
+                case StateType.Credits:
+                    return new Credits();
+                case StateType.Config:
+                    return new Config();
                 default:
                     throw new ArgumentException("Scene type not supported");
             }

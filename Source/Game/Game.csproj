@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EF0E87F2-EAC9-4CAA-BC53-1C4CF6281895}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Game</RootNamespace>
     <AssemblyName>Game</AssemblyName>
@@ -34,19 +34,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;LINUX</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;LINUX</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
     <WarningLevel>4</WarningLevel>
@@ -60,8 +61,27 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;LINUX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Components\BugBehavior.cs" />
+    <Compile Include="Components\Bug2Behavior.cs" />
+    <Compile Include="Components\Bug1Behavior.cs" />
     <Compile Include="Components\CameraBounds.cs" />
     <Compile Include="Components\ItemBehavior.cs" />
     <Compile Include="Components\ColliderNotify.cs" />
@@ -72,25 +92,25 @@
     <Compile Include="Components\MineBehavior.cs" />
     <Compile Include="Components\PlayerAnimations.cs" />
     <Compile Include="Components\PlayerController.cs" />
+    <Compile Include="Components\PlayerInventary.cs" />
     <Compile Include="Components\TextureBasic.cs" />
     <Compile Include="Components\TimeEvent.cs" />
     <Compile Include="Components\TriggerListener.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Content.cs" />
-    <Compile Include="Entities\Background.cs" />
     <Compile Include="Entities\Base\CharacterBase.cs" />
     <Compile Include="Entities\Base\EnemyBase.cs" />
     <Compile Include="Entities\Base\EnvironmentBase.cs" />
     <Compile Include="Entities\Base\ItemBase.cs" />
     <Compile Include="Entities\Base\PlayerBase.cs" />
-    <Compile Include="Entities\Bug.cs" />
+    <Compile Include="Entities\Bug2.cs" />
+    <Compile Include="Entities\Bug1.cs" />
     <Compile Include="Entities\Coin.cs" />
     <Compile Include="Entities\Damage.cs" />
     <Compile Include="Entities\Diamond.cs" />
     <Compile Include="Entities\Exit.cs" />
     <Compile Include="Entities\Mine.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\Puff.cs" />
     <Compile Include="Entities\Score.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\SceneFactory.cs" />
@@ -100,6 +120,8 @@
     <Compile Include="Manager\StateManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\Config.cs" />
+    <Compile Include="Scenes\Credits.cs" />
     <Compile Include="Scenes\EndGame.cs" />
     <Compile Include="Scenes\IntroGame.cs" />
     <Compile Include="Scenes\Level.cs" />
@@ -167,10 +189,6 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nez\Nez.FarseerPhysics\Nez.FarseerPhysics.csproj">
-      <Project>{84d9891c-69f9-4804-9594-70918f3e4bd9}</Project>
-      <Name>Nez.FarseerPhysics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Nez\Nez.PipelineImporter\Nez.PipelineImporter.csproj">
       <Project>{688dd698-fa79-47de-a6ce-919bcc9b1a26}</Project>
       <Name>Nez.PipelineImporter</Name>

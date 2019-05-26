@@ -10,7 +10,7 @@ namespace Game
     public class Game : Core
     {
 		public static StateManager ManagerState;
-        public Game() : base(width: 635, height: 475, isFullScreen: false)
+        public Game() : base(width: Constants.SCREEN_WIDTH, height: Constants.SCREEN_HEIGHT, isFullScreen: false)
         {
 			ManagerState = new StateManager();
 		}
@@ -21,7 +21,7 @@ namespace Game
 			exitOnEscapeKeypress = false;
             Window.Title = Constants.GAME_TITLE;
             Window.AllowUserResizing = false;
-            scene = new Level();
+            ManagerState.SetState(StateType.MainMenu);
         }
     }
 }
