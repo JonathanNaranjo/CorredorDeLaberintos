@@ -1,3 +1,3 @@
 #TFG - UOC
-### CorredorDeLaberintos
+** CorredorDeLaberintos **
 ![](./Doc/gameplay.png)
