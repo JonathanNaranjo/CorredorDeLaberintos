@@ -3,7 +3,7 @@
   <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont.fnt</SourceFile>
   <SourceTime>2019-05-25T21:16:36.036764+02:00</SourceTime>
   <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Font/textFont.xnb</DestFile>
-  <DestTime>2019-05-26T22:07:49.1777556+02:00</DestTime>
+  <DestTime>2019-06-09T12:38:58.2730194+02:00</DestTime>
   <Importer>BitmapFontImporter</Importer>
   <ImporterTime>2019-04-18T00:21:45.5275808+02:00</ImporterTime>
   <Processor>BitmapFontProcessor</Processor>

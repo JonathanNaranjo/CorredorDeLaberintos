@@ -17,6 +17,9 @@ using Game.Scenes;
 
 namespace Game.Entities
 {
+    /// <summary>
+    /// Entidad del jugador principal
+    /// </summary>
     public class Player : PlayerBase
     {
         private BoxCollider boxCollider;
@@ -45,9 +48,13 @@ namespace Game.Entities
 
             boxCollider.setWidth(12);
             boxCollider.setHeight(32);
+            
+
         }
 
-
+        /// <summary>
+        /// Restablecemos los componentes del jugador
+        /// </summary>
 		public void SetInitialPosition()
 		{
             playerInventary.ResetInventary();
@@ -58,6 +65,7 @@ namespace Game.Entities
 		{
 			var level = scene as Level;
 			level?.RestartLevel();
+            this.enabled = true;
 			SoundManager.PlaySound(Content.Sound.death);
 			SetInitialPosition();
 		}

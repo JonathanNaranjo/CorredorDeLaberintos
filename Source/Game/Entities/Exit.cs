@@ -16,6 +16,9 @@ using Game.Entities.Base;
 
 namespace Game.Entities
 {
+    /// <summary>
+    /// Entidad Exit
+    /// </summary>
 	class Exit : EnvironmentBase
 	{
 		public Exit(Vector2 position, int width, int height) : base("Exit")
@@ -27,6 +30,7 @@ namespace Game.Entities
 
 		public override void onAddedToScene()
 		{
+            // Cargamos el sprite
 			var texture = scene.content.Load<Texture2D>(Content.Sprite.exit);
 			addComponent(new Sprite(texture)).renderLayer = 1;
 				

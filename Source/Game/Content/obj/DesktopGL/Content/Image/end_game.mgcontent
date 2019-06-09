@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/end_game.png</SourceFile>
-  <SourceTime>2019-05-25T23:18:07.7800162+02:00</SourceTime>
+  <SourceTime>2019-06-08T03:21:11.7395311+02:00</SourceTime>
   <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Content/Image/end_game.xnb</DestFile>
-  <DestTime>2019-05-26T00:28:45.0315856+02:00</DestTime>
+  <DestTime>2019-06-08T10:31:07.1450521+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

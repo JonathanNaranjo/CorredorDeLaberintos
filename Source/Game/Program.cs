@@ -14,7 +14,9 @@ namespace Game
         static void Main()
         {
             using (var game = new Game())
+            {
                 game.Run();
+            }
         }
     }
 }

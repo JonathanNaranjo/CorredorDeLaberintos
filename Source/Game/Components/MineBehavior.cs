@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace Game.Components
 {
-	class MineBehavior : Component, IUpdatable, ITriggerListener
+    /// <summary>
+    /// Comportamiento de la entidad Mine
+    /// </summary>
+	class MineBehavior : Component, ITriggerListener
 	{
 		private Mine mineEntity;
 		private float moveSpeed = 50;
@@ -18,16 +21,10 @@ namespace Game.Components
 
 		public override void onAddedToEntity()
 		{
-			this.mineEntity = (Mine)entity;
-			this.boxCollider = entity.getComponent<BoxCollider>();
-		}
-
-		public void update()
-		{
-
-		}
-
-
+			mineEntity = (Mine)entity;
+			boxCollider = entity.getComponent<BoxCollider>();
+            boxCollider.setHeight(20);
+        }
 
 		#region ITriggerListener implementation
 
@@ -38,7 +35,7 @@ namespace Game.Components
 			var characterEntity = other.entity as CharacterBase;
 			if (characterEntity != null)
 			{
-				characterEntity.Kill();
+                characterEntity.enabled = false;
 				mineEntity.Kill();
 			}
 

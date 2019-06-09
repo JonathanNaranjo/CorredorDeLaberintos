@@ -10,7 +10,9 @@ using Game.Scenes;
 
 namespace Game
 {
-
+    /// <summary>
+    /// Realiza las transiciones a otras escenas
+    /// </summary>
 	public class StateManager
 	{
 		private Dictionary<StateType, Scene> scenesDict = new Dictionary<StateType, Scene>();
@@ -21,6 +23,8 @@ namespace Game
 
 		public void SetState(StateType state, bool transition = false)
 		{
+            // Codigo descartado, "Pause", no es viable reanudar una escena
+            //----------
             /*
 			// If exist in the dictionary
 			if (scenesDict.ContainsKey(state))
@@ -55,11 +59,8 @@ namespace Game
 
 		private void SetScene(Scene scene, bool transition)
 		{
-            //Game.scene = scene;
-            
             if (transition)
 			{
-
                 TweenManager.stopAllTweens();
                 Game.startSceneTransition(new FadeTransition(() => scene));
             }

@@ -9,6 +9,9 @@ using Nez;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Detecta y notifica las colisiones producidas entre las entidades
+    /// </summary>
     class ColliderNotify : Component, IUpdatable
     {
         private List<ITriggerListener> _tempTriggerList = new List<ITriggerListener>();

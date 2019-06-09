@@ -9,6 +9,9 @@ using Nez;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de la entidad Damage
+    /// </summary>
 	class DamageBehavior : Component, ITriggerListener
 	{
 		#region ITriggerListener implementation

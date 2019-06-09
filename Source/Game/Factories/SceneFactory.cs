@@ -11,6 +11,9 @@ using Game.Scenes;
 
 namespace Game.Factories
 {
+    /// <summary>
+    /// Crea las escenas del juego
+    /// </summary>
     public class SceneFactory
     {
         public static Scene CreateScene(StateType type)

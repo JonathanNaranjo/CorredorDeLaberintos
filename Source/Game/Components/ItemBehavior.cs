@@ -12,6 +12,9 @@ using Game.Entities.Base;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de las entidades Coin y Diamond
+    /// </summary>
     class ItemBehavior : Component, ITriggerListener
     {
         #region ITriggerListener implementation

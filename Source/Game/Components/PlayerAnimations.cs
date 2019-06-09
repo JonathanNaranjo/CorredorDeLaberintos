@@ -13,20 +13,23 @@ using Nez.Textures;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de las animaciones del Player
+    /// </summary>
     public class PlayerAnimations : Component
     {
-        private Sprite<TypeAnimation> animation;
+        private Sprite<AnimationType> animation;
 
         public override void onAddedToEntity()
         {
             var texture = entity.scene.content.Load<Texture2D>(Content.Sprite.player);
             var subtextures = Subtexture.subtexturesFromAtlas(texture, 32, 32);
-            animation = this.addComponent(new Sprite<TypeAnimation>(subtextures[0]));
+            animation = this.addComponent(new Sprite<AnimationType>(subtextures[0]));
 
             // Set animations
             //---------------------------------------------------------------------------------
             // Idle
-            animation.addAnimation(TypeAnimation.Idle, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Idle, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[11],
                 subtextures[11],
@@ -42,7 +45,7 @@ namespace Game.Components
             }));
 
             // Walk
-            animation.addAnimation(TypeAnimation.Walk, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Walk, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[13],
                 subtextures[14],
@@ -53,7 +56,7 @@ namespace Game.Components
             }));
 
             // Run
-            animation.addAnimation(TypeAnimation.Run, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Run, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[13],
                 subtextures[14],
@@ -64,14 +67,14 @@ namespace Game.Components
             }));
 
             // Blink
-            animation.addAnimation(TypeAnimation.Blink, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Blink, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[0],
                 subtextures[11]
             }));
 
             // Slide
-            animation.addAnimation(TypeAnimation.Slide, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Slide, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[10],
                 subtextures[10],
@@ -86,7 +89,7 @@ namespace Game.Components
             }));
 
             // Flip
-            animation.addAnimation(TypeAnimation.Flip, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Flip, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[2],
                 subtextures[3],
@@ -99,19 +102,19 @@ namespace Game.Components
             }));
 
             // Falling
-            animation.addAnimation(TypeAnimation.Falling, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Falling, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[1]
             }));
 
             // Jumping
-            animation.addAnimation(TypeAnimation.Jumping, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Jumping, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[12]
             }));
         }
 
-        public TypeAnimation Animation
+        public AnimationType Animation
         {
             get => this.animation.currentAnimation;
             set => this.animation.play(value);

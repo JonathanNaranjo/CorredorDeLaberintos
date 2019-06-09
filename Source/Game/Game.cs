@@ -7,6 +7,9 @@ using Game.Factories;
 
 namespace Game
 {
+    /// <summary>
+    /// Clase principal del juego
+    /// </summary>
     public class Game : Core
     {
 		public static StateManager ManagerState;

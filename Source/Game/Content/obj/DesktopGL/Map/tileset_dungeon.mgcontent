@@ -3,7 +3,7 @@
   <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Map/tileset_dungeon.png</SourceFile>
   <SourceTime>2018-12-14T14:25:26.0101739+01:00</SourceTime>
   <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Map/tileset_dungeon.xnb</DestFile>
-  <DestTime>2019-05-26T22:07:49.5990237+02:00</DestTime>
+  <DestTime>2019-06-09T12:38:58.6445728+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

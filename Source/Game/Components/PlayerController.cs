@@ -11,6 +11,9 @@ using Game.Entities;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de las controles del Player
+    /// </summary>
     public class PlayerController : Component, IUpdatable
     {
         private Player playerEntity;
@@ -77,6 +80,9 @@ namespace Game.Components
             xAxisInput.deregister();
         }
 
+        /// <summary>
+        /// Configuramos los controles
+        /// </summary>
         void setupInput()
         {
             // setup input for jumping. we will allow z on the keyboard or a on the gamepad
@@ -161,7 +167,7 @@ namespace Game.Components
 				}
 
 				if (velocity.Y > 0)
-					SetAnimation(TypeAnimation.Falling);
+					SetAnimation(AnimationType.Falling);
 
 				if (collisionState.left || collisionState.right && jumpInput.isPressed)
 				{
@@ -169,57 +175,73 @@ namespace Game.Components
 				}
 			}
 
-			// Gravity
+			// Aplicamos la gravedad
 			this.velocity.Y += gravity * Time.deltaTime;
 
 			// Move
 			this.mover.move(this.velocity * Time.deltaTime, this.boxCollider, this.collisionState);
 
-			// Blow to the head or On the floor
+			// Golpe en la cabeza
 			if (this.collisionState.above && this.velocity.Y < 0)
 			{
 				this.velocity.Y = 0;
 				SoundManager.PlaySound(Content.Sound.land);
 			}
 
+            // Golpe sobre el piso
 			if (this.collisionState.below)
 				this.velocity.Y = 0;
 
 		}
 
-		#region Movements
+		#region Movimientos
 		//------------------------------------------------------------------
+        /// <summary>
+        /// Parado
+        /// </summary>
 		private void DoIdle()
 		{
 			this.velocity.X = 0;
-			SetAnimation(TypeAnimation.Idle);
+			SetAnimation(AnimationType.Idle);
 		}
 
+        /// <summary>
+        /// Caminar
+        /// </summary>
 		private void DoWalk()
 		{
 			this.velocity.X = (moveDir.X) * moveSpeed;
-			SetAnimation(TypeAnimation.Run);
+			SetAnimation(AnimationType.Run);
 		}
 
+        /// <summary>
+        /// Saltar
+        /// </summary>
 		private void DoJump()
 		{
 			this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
-			SetAnimation(TypeAnimation.Jumping);
+			SetAnimation(AnimationType.Jumping);
 			if (Sliding)
 				SoundManager.PlaySound(Content.Sound.slidejump);
 			else
 				SoundManager.PlaySound(Content.Sound.jump);
 		}
 
+        /// <summary>
+        /// Caminar en el aire
+        /// </summary>
 		private void DoWalkAir()
 		{
 			this.velocity.X = (moveDir.X) * moveSpeed;
-			SetAnimation(TypeAnimation.Jumping);
+			SetAnimation(AnimationType.Jumping);
 		}
 
+        /// <summary>
+        /// Deslizar
+        /// </summary>
 		private void DoSlide()
 		{
-			SetAnimation(TypeAnimation.Slide);
+			SetAnimation(AnimationType.Slide);
 			
 			if (!Sliding) // Slide off
 			{
@@ -239,6 +261,9 @@ namespace Game.Components
 			}
 		}
 
+        /// <summary>
+        /// Salto en el aire (desde las paredes)
+        /// </summary>
 		private void DoJumpAir()
 		{
 			if (collisionState.left && jumpAirDir != -1 && jumpInput.isPressed)
@@ -258,9 +283,11 @@ namespace Game.Components
 		//------------------------------------------------------------------
 		#endregion
 
-
-
-		private void SetAnimation(TypeAnimation typeAnimation)
+        /// <summary>
+        /// Cambiamos la animacion del jugador
+        /// </summary>
+        /// <param name="typeAnimation"></param>
+		private void SetAnimation(AnimationType typeAnimation)
 		{
 			if (this.moveDir.X < 0)
 				playerAnimation.FlipX = true;
@@ -272,25 +299,34 @@ namespace Game.Components
 				playerAnimation.Animation = typeAnimation;
 		}
 
+        /// <summary>
+        /// Reestablecemos la posicion inicial
+        /// </summary>
 		public void SetInitialPosition()
 		{
 			playerEntity.position = initialPosition;
 			velocity.X = 0;
 			velocity.Y = 0;
-			playerAnimation.Animation = TypeAnimation.Idle;
+			playerAnimation.Animation = AnimationType.Idle;
 			playerAnimation.FlipX = false;
 		}
 
+        /// <summary>
+        /// Salto
+        /// </summary>
 		public void Jump()
 		{
-			playerAnimation.Animation = TypeAnimation.Jumping;
+			playerAnimation.Animation = AnimationType.Jumping;
 			this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
 			SoundManager.PlaySound(Content.Sound.jump);
 		}
 
+        /// <summary>
+        /// Impulso
+        /// </summary>
 		public void Impulse()
 		{
-			playerAnimation.Animation = TypeAnimation.Jumping;
+			playerAnimation.Animation = AnimationType.Jumping;
 			this.velocity.Y = -Mathf.sqrt(2f * jumpHeight * gravity);
 		}
 	}

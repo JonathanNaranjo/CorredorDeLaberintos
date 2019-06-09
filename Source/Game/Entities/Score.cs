@@ -14,6 +14,9 @@ using Game.Components;
 
 namespace Game.Entities
 {
+    /// <summary>
+    /// Presenta la puntuacion del jugador
+    /// </summary>
     class Score : Entity
     {
         private UICanvas canvas;

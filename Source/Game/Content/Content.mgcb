@@ -48,7 +48,7 @@
 /processorParam:TextureFormat=Color
 /build:Font/textFont_1.png
 
-#begin Image/configurar.png
+#begin Image/config.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -58,7 +58,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Image/configurar.png
+/build:Image/config.png
 
 #begin Image/credits.png
 /importer:TextureImporter
@@ -292,4 +292,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprite/player.png
+
+#begin Sprite/puff_red.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/puff_red.png
 

@@ -11,6 +11,9 @@ using Nez.Textures;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de la camara principal
+    /// </summary>
     class CameraBounds : Component, IUpdatable
     {
         public Vector2 min, max;

@@ -9,6 +9,9 @@ using Nez.Systems;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento del escape del nivel
+    /// </summary>
 	class LevelBehavior : Component, IUpdatable
 	{
 		VirtualButton escapeInput;
@@ -31,11 +34,13 @@ namespace Game.Components
 
 		public void update()
 		{
+            // Si ha presionado la tecla escape
 			if (escapeInput.isReleased)
 			{
 				Game.ManagerState.SetState(StateType.MainMenu, true);
 			}
 
+            // Si es un nuevo estado
 			if (hasNewState)
 			{
 				Game.ManagerState.SetState(nextState);

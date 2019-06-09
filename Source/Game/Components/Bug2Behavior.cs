@@ -13,6 +13,9 @@ using Game.Scenes;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de la entidad Bug2
+    /// </summary>
 	public class Bug2Behavior : Component, IUpdatable, ITriggerListener
 	{
 		private Bug2 bugEntity;

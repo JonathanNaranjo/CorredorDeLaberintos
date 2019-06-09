@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Game.Entities.Base
 {
-
 	public abstract class CharacterBase : Entity
 	{
 		public bool Alive;
@@ -18,6 +17,4 @@ namespace Game.Entities.Base
 		}
 		virtual public void Kill() { }
 	}
-
-	
 }

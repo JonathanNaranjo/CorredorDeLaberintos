@@ -15,6 +15,9 @@ using Game.Entities.Base;
 
 namespace Game.Entities
 {
+    /// <summary>
+    /// Entidad Damage
+    /// </summary>
 	class Damage : EnvironmentBase
 	{
 		public Damage(Vector2 position, int width, int heigth) : base(EntityType.Damage.ToString())

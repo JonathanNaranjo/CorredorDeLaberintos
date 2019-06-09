@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento del inventario del Player
+    /// </summary>
     class PlayerInventary : Component
     {
         private int diamonds;

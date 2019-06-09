@@ -13,37 +13,39 @@ using Game.Entities;
 using Game.Components;
 using Game.Factories;
 using Microsoft.Xna.Framework;
+using Nez.BitmapFonts;
+using Game.Scenes.Base;
 
 namespace Game.Scenes
 {
-    class Credits : Scene
+    /// <summary>
+    /// Escena que presenta los creditos del juego
+    /// </summary>
+    class Credits : SceneBase
     {
-        public const int SCREEN_SPACE_RENDER_LAYER = 999;
-        public UICanvas canvas;
-
-        public override void initialize()
-        {
-            base.initialize();
-            clearColor = Color.Black;
-            var managerScene = createEntity("ManagerScene");
-            managerScene.addComponent(new DebugScene());
-            managerScene.addComponent(new LevelBehavior());
-
-            addRenderer(new DefaultRenderer());
-
-            Screen.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-            canvas = createEntity("ui").addComponent(new UICanvas());
-            canvas.isFullScreen = true;
-            canvas.renderLayer = SCREEN_SPACE_RENDER_LAYER;
-        }
 
         public override void onStart()
         {
+            // Fondo
             var texture = content.Load<Texture2D>(Content.Image.credits);
             Image imag = canvas.stage.addElement(new Image(texture));
             imag.setWidth(Constants.SCREEN_WIDTH);
             imag.setHeight(Constants.SCREEN_HEIGHT);
             imag.setZIndex(0);
+
+            // Boton atras
+            //---------------
+            var buttonStyle = new TextButtonStyle(new PrimitiveDrawable(new Color(78, 91, 98), 10f), new PrimitiveDrawable(new Color(244, 23, 135)), new PrimitiveDrawable(new Color(168, 207, 115)))
+            {
+                downFontColor = Color.Black
+            };
+
+            var backButton = canvas.stage.addElement(new TextButton(Constants.MENU_BACK, buttonStyle));
+            backButton.onClicked += BackMenu => { Game.ManagerState.SetState(StateType.MainMenu, true); };
+            backButton.setWidth(100);
+            backButton.setHeight(20);
+            backButton.setPosition(Constants.SCREEN_WIDTH - backButton.getWidth() - 15, Constants.SCREEN_HEIGHT - backButton.getHeight() - 5);
+            //---------------
         }
     }
 }

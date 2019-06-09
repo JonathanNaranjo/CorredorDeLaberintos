@@ -10,7 +10,9 @@ using Nez;
 
 namespace Game.Factories
 {
-
+    /// <summary>
+    /// Crea las entidades del juego
+    /// </summary>
     public class EntityFactory
     {
         public static Entity CreateEntity(String typeEntity, Vector2 position, int width, int height)

@@ -18,14 +18,17 @@ using Game.Scenes;
 
 namespace Game.Entities
 {
+    /// <summary>
+    /// Entidad Bug2
+    /// </summary>
 	class Bug2 : EnemyBase
 	{
-		private Sprite<TypeAnimation> animation;
+		private Sprite<AnimationType> animation;
 		private BoxCollider boxCollider;
         private int sizeFrame = 32;
         public int Width { get => (int)boxCollider.width; }
 		public int Height { get => (int)boxCollider.height; }
-		public TypeAnimation Animation
+		public AnimationType Animation
 		{
 			get => this.animation.currentAnimation;
 			set => this.animation.play(value);
@@ -49,14 +52,15 @@ namespace Game.Entities
 			(scene as Level)?.SetMapCollition(this);
 			this.position = new Vector2(this.position.X + 32 / 2, this.position.Y);
 
+            // Cargamos las hojas de sprites
 			var texture = scene.content.Load<Texture2D>(Content.Sprite.bug2);
 			var subtextures = Subtexture.subtexturesFromAtlas(texture, sizeFrame, 27);
-			animation = this.addComponent(new Sprite<TypeAnimation>(subtextures[0]));
+			animation = this.addComponent(new Sprite<AnimationType>(subtextures[0]));
 
-			// Set animations
+			// Establecemos las animaciones
 			//---------------------------------------------------------------------------------
 			// Walk
-			animation.addAnimation(TypeAnimation.Walk, new SpriteAnimation(new List<Subtexture>()
+			animation.addAnimation(AnimationType.Walk, new SpriteAnimation(new List<Subtexture>()
 			{
 				subtextures[3],
 				subtextures[4],
@@ -64,13 +68,13 @@ namespace Game.Entities
 			}));
 
 			// Dead
-			animation.addAnimation(TypeAnimation.Death, new SpriteAnimation(new List<Subtexture>()
+			animation.addAnimation(AnimationType.Death, new SpriteAnimation(new List<Subtexture>()
 			{
 				subtextures[6]
 			}));
 
 
-			this.Animation = TypeAnimation.Walk;
+			this.Animation = AnimationType.Walk;
 		}
 
 		public override void update()
@@ -79,6 +83,7 @@ namespace Game.Entities
 
 			if (!Alive)
 			{ 
+                // Incrementamos el temporizador
 				deathCounter += Time.deltaTime;
 				if (deathCounter > deathLimit)
 					this.destroy();
@@ -87,7 +92,7 @@ namespace Game.Entities
 
 		public override void Kill()
 		{
-			this.Animation = TypeAnimation.Death;
+			this.Animation = AnimationType.Death;
 			this.Alive = false;
 			SoundManager.PlaySound(Content.Sound.squish);
 		}

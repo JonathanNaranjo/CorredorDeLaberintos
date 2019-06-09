@@ -18,9 +18,12 @@ using Game.Entities.Base;
 
 namespace Game.Entities
 {
+    /// <summary>
+    /// Entidad Coin
+    /// </summary>
     public class Coin : ItemBase
     {
-        private Sprite<TypeAnimation> animation;
+        private Sprite<AnimationType> animation;
         private int sizeFrame = 16;
 
         public Coin(Vector2 position) : base(EntityType.Coin.ToString())
@@ -32,16 +35,17 @@ namespace Game.Entities
 
         public override void onAddedToScene()
         {
+            // Cargamos las hojas de sprites
             var texture = scene.content.Load<Texture2D>(Content.Sprite.coin);
             var subtextures = Subtexture.subtexturesFromAtlas(texture, sizeFrame , sizeFrame);
-            animation = this.addComponent(new Sprite<TypeAnimation>(subtextures[0]));
+            animation = this.addComponent(new Sprite<AnimationType>(subtextures[0]));
             this.position = new Vector2(this.position.X + sizeFrame / 2, this.position.Y);
             
 
-            // Set animations
+            // Establecemos las animaciones
             //---------------------------------------------------------------------------------
             // Idle (rotate)
-            animation.addAnimation(TypeAnimation.Idle, new SpriteAnimation(new List<Subtexture>()
+            animation.addAnimation(AnimationType.Idle, new SpriteAnimation(new List<Subtexture>()
             {
                 subtextures[0],
                 subtextures[1],
@@ -52,10 +56,10 @@ namespace Game.Entities
                 subtextures[6]
             }));
 
-            this.Animation = TypeAnimation.Idle;
+            this.Animation = AnimationType.Idle;
         }
 
-        public TypeAnimation Animation
+        public AnimationType Animation
         {
             get => this.animation.currentAnimation;
             set => this.animation.play(value);

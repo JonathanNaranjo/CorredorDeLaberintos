@@ -11,6 +11,9 @@ using Nez.Textures;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Modo depuracion
+    /// </summary>
     public class DebugScene : Component, IUpdatable
     {
         VirtualButton inputKey;

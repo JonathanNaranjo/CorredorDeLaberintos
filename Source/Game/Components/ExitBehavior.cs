@@ -9,6 +9,9 @@ using Nez;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Comportamiento de la entidad Exit
+    /// </summary>
     class ExitBehavior : Component, ITriggerListener
 	{
 		#region ITriggerListener implementation

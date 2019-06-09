@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    /// <summary>
+    /// Administra y reproduce musica y efectos de sonido
+    /// </summary>
     public static class SoundManager
     {
         public enum MusicTrack
@@ -28,10 +31,10 @@ namespace Game
         {
             _currentSong = songName;
 
-            // Load and play the song
+            // Cargamos y reproducimos el efecto de sonido
             var song = Core.content.Load<Song>(songName);
             MediaPlayer.Play(song);
-            MediaPlayer.Volume = Global.Volume;
+            MediaPlayer.Volume = Constants.Volume;
             MediaPlayer.IsRepeating = repeating;
         }
 
@@ -49,23 +52,20 @@ namespace Game
 
         public static void SetVolume(float value)
         {
-            Global.Volume = Mathf.clamp(value, 0f, 1f);
-            MediaPlayer.Volume = Global.Volume;
-            // TODO: Update volume UI display
+            Constants.Volume = Mathf.clamp(value, 0f, 1f);
+            MediaPlayer.Volume = Constants.Volume;
         }
 
         public static void RaiseVolume(float value = 0.1f)
         {
-            Global.Volume = Mathf.clamp(Global.Volume + value, 0f, 1f);
-            MediaPlayer.Volume = Global.Volume;
-            // TODO: Update volume UI display
+            Constants.Volume = Mathf.clamp(Constants.Volume + value, 0f, 1f);
+            MediaPlayer.Volume = Constants.Volume;
         }
 
         public static void LowerVolume(float value = 0.1f)
         {
-            Global.Volume = Mathf.clamp(Global.Volume - value, 0f, 1f);
-            MediaPlayer.Volume = Global.Volume;
-            // TODO: Update volume UI display
+            Constants.Volume = Mathf.clamp(Constants.Volume - value, 0f, 1f);
+            MediaPlayer.Volume = Constants.Volume;
         }
     }
 }

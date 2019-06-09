@@ -13,6 +13,5 @@ namespace Game.Entities.Base
 		{
 			this.tag = (int)TagType.Enemy;
 		}
-
 	}
 }

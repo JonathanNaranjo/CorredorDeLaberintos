@@ -3,7 +3,7 @@
   <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sound/death.mp3</SourceFile>
   <SourceTime>2010-12-18T01:00:02.7903248+01:00</SourceTime>
   <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Sound/death.xnb</DestFile>
-  <DestTime>2019-05-26T22:07:52.2327353+02:00</DestTime>
+  <DestTime>2019-06-09T12:39:00.7818734+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

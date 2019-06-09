@@ -7,6 +7,9 @@ using Nez;
 
 namespace Game.Components
 {
+    /// <summary>
+    /// Componente lanza eventos en un intervalo de tiempo
+    /// </summary>
     class TimeEvent : Component, IUpdatable
     {
         readonly float refreshTime;

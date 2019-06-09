@@ -12,91 +12,95 @@ using Nez.Tiled;
 using Game.Entities;
 using Game.Components;
 using Game.Factories;
+using Game.Scenes.Base;
 
 namespace Game.Scenes
 {
-	class Level : Scene
-	{
-		private Entity mapEntity;
-		private TiledMap tiledMap;
-		private TiledMapComponent mapLayer;
-        public const int SCREEN_SPACE_RENDER_LAYER = 999;
-        public UICanvas canvas;
+    /// <summary>
+    /// Escena que se encarga de cargar los niveles
+    /// </summary>
+    class Level : SceneBase
+    {
+        private Entity mapEntity;
+        private TiledMap tiledMap;
+        private TiledMapComponent mapLayer;
 
         public override void initialize()
         {
-			base.initialize();
-            clearColor = Color.Black;
-            var managerScene = createEntity("ManagerScene");
-            managerScene.addComponent(new DebugScene());
-			managerScene.addComponent(new LevelBehavior());
-            initializaCanvas();
+            base.initialize();
 
             // Create map
             LoadMap();
-			LoadEntities();
-            this.addEntity(new Score(this.canvas));
-		}
+            LoadEntities();
+            addEntity(new Score(this.canvas));
+        }
 
+        /// <summary>
+        /// Carga un mapa de Tiled
+        /// </summary>
 		private void LoadMap()
         {
-			mapEntity = createEntity(EntityType.TileMap.ToString());
-			tiledMap = content.Load<TiledMap>(Content.Map.level1);
-			mapLayer = mapEntity.addComponent(new TiledMapComponent(tiledMap, "Map"));
+            mapEntity = createEntity(EntityType.TileMap.ToString());
+            tiledMap = content.Load<TiledMap>(Content.Map.level1);
+            mapLayer = mapEntity.addComponent(new TiledMapComponent(tiledMap, "Map"));
 
-			// Camera bounds
-			var topLeft = new Vector2(tiledMap.tileWidth, tiledMap.tileWidth);
-			var bottomRight = new Vector2(tiledMap.tileWidth * (tiledMap.width - 1), tiledMap.tileWidth * (tiledMap.height - 1));
-			mapEntity.addComponent(new CameraBounds(topLeft, bottomRight));
-			mapEntity.tag = (int)TagType.TileMap;
-			//mapLayer.renderLayer = 4;
-		}
+            // Camera bounds
+            var topLeft = new Vector2(tiledMap.tileWidth, tiledMap.tileWidth);
+            var bottomRight = new Vector2(tiledMap.tileWidth * (tiledMap.width - 1), tiledMap.tileWidth * (tiledMap.height - 1));
+            mapEntity.addComponent(new CameraBounds(topLeft, bottomRight));
+            mapEntity.tag = (int)TagType.TileMap;
+            //mapLayer.renderLayer = 4;
+        }
 
+        /// <summary>
+        /// Carga todas las entidades de un mapa
+        /// </summary>
+        /// <param name="ignorePlayer"></param>
         private void LoadEntities(bool ignorePlayer = false)
         {
-			TiledObject[] entities = this.tiledMap.getObjectGroup("Entities").objects;
+            TiledObject[] entities = this.tiledMap.getObjectGroup("Entities").objects;
 
-			foreach (var e in entities)
+            foreach (var e in entities)
             {
-				if (ignorePlayer && e.name.Equals(EntityType.Player.ToString()))
-					continue;
-				else
-					addEntity(EntityFactory.CreateEntity(e.name, new Vector2(e.x, e.y), e.width, e.height));
+                if (ignorePlayer && e.name.Equals(EntityType.Player.ToString()))
+                    continue;
+                else
+                    addEntity(EntityFactory.CreateEntity(e.name, new Vector2(e.x, e.y), e.width, e.height));
             }
         }
 
+        /// <summary>
+        /// Reinicia el nivel
+        /// </summary>
         public void RestartLevel()
         {
-			var listaEntidades = this.findEntitiesWithTag((int)TagType.Item);
-			listaEntidades.AddRange(this.findEntitiesWithTag((int)TagType.Enemy));
-			listaEntidades.AddRange(this.findEntitiesWithTag((int)TagType.Environment));
+            var listaEntidades = this.findEntitiesWithTag((int)TagType.Item);
+            listaEntidades.AddRange(this.findEntitiesWithTag((int)TagType.Enemy));
+            listaEntidades.AddRange(this.findEntitiesWithTag((int)TagType.Environment));
 
-			foreach (var e in listaEntidades)
-			{
-				e.components.removeAllComponents();
-				this.entities.remove(e);
-			}
+            foreach (var e in listaEntidades)
+            {
+                e.components.removeAllComponents();
+                this.entities.remove(e);
+            }
 
-			LoadEntities(true);
-		}
+            LoadEntities(true);
+        }
 
-		public void SetMapCollition(Entity entity)
-		{
-			entity.addComponent(new TiledMapMover(mapLayer.collisionLayer));
-		}
-
-        public void initializaCanvas()
+        /// <summary>
+        /// Establece una entidad para que sea colisionable
+        /// </summary>
+        /// <param name="entity"></param>
+        public void SetMapCollition(Entity entity)
         {
-            addRenderer(new ScreenSpaceRenderer(100, SCREEN_SPACE_RENDER_LAYER));
-            addRenderer(new RenderLayerExcludeRenderer(0, SCREEN_SPACE_RENDER_LAYER));
-            canvas = createEntity("ui").addComponent(new UICanvas());
-            canvas.isFullScreen = true;
-            canvas.renderLayer = SCREEN_SPACE_RENDER_LAYER;
+            entity.addComponent(new TiledMapMover(mapLayer.collisionLayer));
         }
 
         public override void onStart()
         {
             SoundManager.PlayMusic(Content.Music.level1);
         }
+        
+            
     }
 }

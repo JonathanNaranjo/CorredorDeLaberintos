@@ -7,7 +7,7 @@
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont.fnt</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont_0.png</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Font/textFont_1.png</File>
-    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/configurar.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/config.png</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/credits.png</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/end_game.png</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Image/menu_background.png</File>
@@ -36,8 +36,10 @@
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/exit.png</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/mine.png</File>
     <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/player.png</File>
+    <File>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Sprite/puff_red.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

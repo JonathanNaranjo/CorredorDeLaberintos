@@ -3,7 +3,7 @@
   <SourceFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/Music/level1_music.mp3</SourceFile>
   <SourceTime>2019-05-26T20:11:32.6539025+02:00</SourceTime>
   <DestFile>C:/SC/ESTUDIO/TFG/CorredorDeLaberintos/Source/Game/Content/bin/DesktopGL/Music/level1_music.xnb</DestFile>
-  <DestTime>2019-05-26T22:07:51.3730621+02:00</DestTime>
+  <DestTime>2019-06-09T12:39:00.1438068+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>SongProcessor</Processor>
