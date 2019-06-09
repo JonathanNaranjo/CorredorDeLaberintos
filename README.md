@@ -1,2 +1,2 @@
-#CorredorDeLaberintos
+## CorredorDeLaberintos
 ![](./Doc/gameplay.png)
